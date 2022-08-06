@@ -53,18 +53,20 @@ void main()
 void insert(sequenlist *L, int i, int b) /*插入函数*/
 {
   int j;
-  if ((i < 1) || (i > L->length + 1))
+  if ((i < 1) || (i > L->length + 1)) /*判断插入的位置是否在范围内*/
     printf("position does not exist .\n");
   else
   {
     for (j = L->length; j >= i; j--)
-      L->a[j + 1] = L->a[j];
-    L->a[i] = b;
-    L->length++;
+    {
+      L->a[j + 1] = L->a[j]; /*将数组加一，然后把原数组的最后一位后移一位，依次向后移，直到把第i的个也移动完毕*/
+    }
+    L->a[i] = b;             /*将值赋值到第i的个结点*/
+    L->length++;             /*表长度加一*/
   }
-  print_array(L);
+  print_array(L); /*输出表*/
 }
-
+/*删除函数的定义*/
 void delete (sequenlist *L, int i) /*删除函数*/
 {
   int j;
@@ -73,12 +75,12 @@ void delete (sequenlist *L, int i) /*删除函数*/
   else
   {
     for (j = i + 1; j <= L->length; j++)
-      L->a[j - 1] = L->a[j];
-    L->length--;
+      L->a[j - 1] = L->a[j]; /*将最后一位向前赋值，直到循环到表最后一个*/
+    L->length--;             /*表长度减一*/
   }
   print_array(L);
 }
-
+/*查找函数的定义*/
 int locate(sequenlist *L, int x) /*查找函数*/
 {
   int i;
@@ -89,8 +91,15 @@ int locate(sequenlist *L, int x) /*查找函数*/
     return i;
   else
     return 0;
+  // for(i = L->length;L->a[i]!=NULL;i--)
+  // {
+  //   if (L->a[i] == x)
+  //     return i;
+  //   else
+  //     return 0;
+  // }
 }
-
+/*输出函数的定义*/
 void print_array(sequenlist *L) /*输出元素*/
 {
   int j;
